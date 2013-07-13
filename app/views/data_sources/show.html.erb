@@ -1,0 +1,19 @@
+<%# app/views/data_sources/show.html.erb %>
+
+<h2><%=h @unknown_subject.name %>&nbsp;&gt;&nbsp<%=h @data_source.user_id %></h2>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @data_source.status_updates.sort(created_at: 1).each do |status| -%>
+      <tr>
+        <td><%=h status.created_at %></td>
+        <td><%=h status.text %></td>
+    <% end -%>
+  </tbody>
+</table>

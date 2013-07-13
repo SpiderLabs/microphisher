@@ -1,0 +1,2 @@
+class StatusUpdatesController < ApplicationController
+end

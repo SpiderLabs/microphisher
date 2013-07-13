@@ -1,0 +1,2 @@
+class UnknownSubjectsController < ApplicationController
+end

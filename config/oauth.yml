@@ -1,0 +1,27 @@
+#
+# OAuth client configuration
+# Default setup points to Twitter
+#
+development:
+  site: https://api.twitter.com/
+  access_token_path: /oauth/access_token
+  authorize_path: /oauth/authenticate
+  request_token_path: /oauth/request_token
+  consumer_key: add_real_consumer_key
+  consumer_secret: add_real_consumer_secret
+
+test:
+  site: https://api.twitter.com/
+  access_token_path: /oauth/access_token
+  authorize_path: /oauth/authenticate
+  request_token_path: /oauth/request_token
+  consumer_key: add_real_consumer_key
+  consumer_secret: add_real_consumer_secret
+
+production:
+  site: https://api.twitter.com/
+  access_token_path: /oauth/access_token
+  authorize_path: /oauth/authenticate
+  request_token_path: /oauth/request_token
+  consumer_key: add_real_consumer_key
+  consumer_secret: add_real_consumer_secret

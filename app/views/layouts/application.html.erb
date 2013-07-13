@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>mongophisher | <%=h request.path %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/journal/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <h1><%= link_to 'mongophisher', :controller => 'home' %></h1>
+    <%= yield %>
+  </div>
+</body>
+</html>
