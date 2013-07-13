@@ -1,4 +1,7 @@
 Mongophisher::Application.routes.draw do
+  # Root controller
+  root to: 'home#index'
+
   # Resources
   resources :unknown_subjects do
     resources :data_sources do
