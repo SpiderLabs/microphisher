@@ -1,5 +1,6 @@
 class OauthController < ApplicationController
   before_filter :setup_oauth
+  skip_filter :require_login, :only => [ :login, :authorize ]
 
   def setup_oauth
     oauth_config = YAML.load_file('config/oauth.yml')[Rails.env]
