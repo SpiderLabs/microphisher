@@ -1,19 +1,29 @@
-<%# app/views/data_sources/show.html.erb %>
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt;
+  <%= link_to @unknown_subject.name, @unknown_subject %> &gt; <%= @data_source.user_id %></h3>
 
-<h2><%=h @unknown_subject.name %>&nbsp;&gt;&nbsp<%=h @data_source.user_id %></h2>
+<%# page contents %>
+<div class="well">
+  <span class="pull-left"><%= page_entries_info @status_updates %></span>
+  <span class="pull-right"><%= paginate @status_updates %></span>
+</div>
 
-<table class="table table-bordered table-striped">
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Time</th>
-      <th>Text</th>
+      <th>Content</th>
+      <th>Published</th>
+      <th>Source</th>
     </tr>
   </thead>
   <tbody>
-    <% @data_source.status_updates.sort(created_at: 1).each do |status| -%>
-      <tr>
-        <td><%=h status.created_at %></td>
-        <td><%=h status.text %></td>
+    <% @status_updates.desc(:_id).each do |status_update| -%>
+    <tr>.
+      <td><%= link_to status_update.text, [ @unknown_subject, @data_source, status_update ] %></td>
+      <td><%=h time_ago_in_words(status_update.created_at.to_time) %>&nbsp;ago</td>
+      <td><%= raw status_update.source %></td>
+    </tr>
     <% end -%>
   </tbody>
 </table>
+

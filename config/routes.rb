@@ -5,7 +5,7 @@ Mongophisher::Application.routes.draw do
   # Resources
   resources :unknown_subjects do
     resources :data_sources do
-      resource :status_updates
+      resources :status_updates
     end
   end
 

@@ -5,40 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="microphisher reference implementation">
   <meta name="author" content="ualbuquerque@trustwave.com, jespinhara@trustwave.com">  
-  <title>mongophisher | <%=h request.path %></title>
+  <title>&micro;hisher</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/flatly/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/united/bootstrap.min.css" rel="stylesheet">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
   <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%# navigation bar %>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <%= link_to 'µphisher', root_url, :class => 'brand' %>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">Unsubs</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><% if logged_in? -%>
-              <p class="navbar-text">
-                <%= image_tag current_user.avatar, :width => 32, :height => 32 %>&nbsp;<%= current_user.name %>
-              </p>
-            <% else -%>
-              <%= link_to 'Login with Twitter', :controller => :oauth, :action => :login %>
-            <% end -%></li>
-          </ul><%# /ul.nav %>
-        </div><%# /div.nav-collapse %>
-      </div>
-    </div>
-  </div>
-    
-  <%# page contents %>
+  <%# main page container %>
   <div class="container">
+  
+    <%# navigation bar %>
+    <div class="navbar">
+      <div class="navbar-inner">
+      <%= link_to 'µphisher', home_url, :class => 'brand' %>
+      <ul class="nav">
+        <%# Home link -- this should definitely be more DRY %>
+        <% if current_page?(home_url) -%>
+          <li class="active"><%= link_to 'Home', '#' %></li>
+        <% else -%>
+          <li><%= link_to 'Home', home_url %></li>
+        <% end -%>
+        
+        <%# Unknown subjects link -- this should definitely be more DRY %>
+        <% if current_page?(unknown_subjects_url) -%>
+          <li class="active"><%= link_to 'Unsubs', '#' %></li>
+        <% else -%>
+          <li><%= link_to 'Unsubs', unknown_subjects_url %></li>
+        <% end -%>
+        
+        <%# Profiles link -- this should definitely be more DRY %>
+        <li><a href="#">Profiles</a></li>
+      </ul>
+    </div>
+
+    <%# page contents %>
     <%= yield %>
   </div>
 </body>

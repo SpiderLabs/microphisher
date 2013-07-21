@@ -1,20 +1,12 @@
+<%# page title %>
+<h3>Home</h3>
+
+<%# page contents %>
 <% if logged_in? -%>
-  <%= image_tag current_user.avatar %>
-  Welcome, <%= link_to current_user.name, :controller => :oauth, :action => :logout %>
-
-  <h2>Unsub Listing</h2>
-
-  <% current_user.unknown_subjects.each do |unsub| -%>
-    <h3><%= link_to unsub.name, unsub %></h3>
-    <p>Known aliases: <%= unsub.aliases.join(', ') %></p>
-    <p><%=h unsub.description %></p>
-    <% unsub.data_sources.each do |data_source| -%>
-      <blockquote>
-        <strong><%= link_to data_source.user_id, [ unsub, data_source ] %></strong>
-        <%=h data_source.status_updates.count %>&nbsp;tweets
-      </blockquote>
-    <% end -%>
-  <% end -%>
+  <p>Welcome, <strong><%=h current_user.name %></strong>. You have
+  <%= link_to "#{current_user.unknown_subjects.count} unknown subjects",
+    unknown_subjects_path %> registered.</p>
 <% else -%>
-  <%= link_to 'Login with Twitter', :controller => :oauth, :action => :login %>
+  <p>Please <%= link_to 'login with Twitter', :controller => :oauth,
+    :action => :login %></p>
 <% end -%>
