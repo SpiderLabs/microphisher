@@ -1,0 +1,5 @@
+<%# unknown subject partial %>
+<%= content_tag_for :div, unknown_subject, :class => 'well' do -%>
+  <h4><%= link_to unknown_subject.name, unknown_subject %></h4>
+  <p><%=h unknown_subject.description %></p>
+<% end -%>
