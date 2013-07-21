@@ -14,6 +14,9 @@ gem 'oauth'
 # Use DelayedJob for background job scheduling
 gem 'delayed_job_mongoid'
 
+# Use Kaminari for pagination
+gem 'kaminari'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
