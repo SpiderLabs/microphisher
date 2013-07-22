@@ -2,10 +2,25 @@
 <h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt; <%=h @unknown_subject.name %></h3>
 
 <%# page contents %>
-<h4><%=h @unknown_subject.name %></h4>
-<span class="pull-right"><%= link_to 'XXXX Create new profile', '#' %></span>
+<h4>
+  <%=h @unknown_subject.name %>
+  <span class="pull-right">
+    <%= link_to edit_unknown_subject_path(@unknown_subject) do %>
+      <li class="icon-pencil"></li>&nbsp;Edit
+    <% end -%>
+    &nbsp;
+    <%= link_to unknown_subject_path(@unknown_subject), :confirm => 'Are you sure?',
+      :method => :delete do %>
+      <li class="icon-trash"></li>&nbsp;Delete
+    <% end -%>
+  </span>
+</h4>
 <p><%=h @unknown_subject.description %></p>
-<p>Known aliases:&nbsp;<%=h @unknown_subject.aliases.join(', ') %></p>
 
 <h4>Twitter IDs</h4>
-<%= render :partial => 'data_source', :collection => @unknown_subject.data_sources %>
+<% if @unknown_subject.data_sources.empty? -%>
+  <div class="well">No data sources registered</div>
+<% else -%>
+  <%= render :partial => 'data_source', :collection => @unknown_subject.data_sources %>
+<% end -%>
+

@@ -1,0 +1,6 @@
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt; New</h3>
+
+<%# page contents %>
+<%= render :partial => 'unknown_subject_form',
+  :locals => { :unsub => @unknown_subject } %>

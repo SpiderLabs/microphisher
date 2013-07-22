@@ -13,7 +13,10 @@ class Twitter
     tweet_list_json = @access_token.get(tweet_request).body
     tweet_list = JSON.parse(tweet_list_json)
     
-    while tweet_list.size > 0 && tweet_list.first.
+    # TODO: We should act proactively in order to avoid being
+    # rate limited; Twitter explicitly mentions applications which
+    # consistently exceed rate limiting will be blacklisted
+    while tweet_list.size > 0 && tweet_list.first['errors'].nil?
       $stderr.puts(tweet_list_json) if tweet_list.size < 5
       $stderr.puts("Tweet count: #{tweet_list.size}")
       tweet_list.each { |tweet| yield tweet }

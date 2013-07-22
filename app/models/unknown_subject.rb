@@ -3,7 +3,6 @@ class UnknownSubject
   
   # Attribute listing
   field :name, type: String
-  field :aliases, type: Array, default: []
   field :description, type: String
   
   # Validations

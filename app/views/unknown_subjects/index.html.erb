@@ -3,3 +3,9 @@
 
 <%# page contents %>
 <%= render :partial => 'unknown_subject', :collection => @unknown_subjects %>
+
+<div class="well">
+  <%= link_to new_unknown_subject_path do %>
+    <h4><i class="icon-plus"></i>&nbsp;New Unknown Subject</h4>
+  <% end -%>
+</div>
