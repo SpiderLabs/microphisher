@@ -7,6 +7,7 @@ Mongophisher::Application.routes.draw do
     resources :data_sources do
       resources :status_updates
     end
+    resources :profiles
   end
 
   # Home screen

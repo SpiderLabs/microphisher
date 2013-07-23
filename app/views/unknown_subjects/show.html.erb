@@ -17,10 +17,35 @@
 </h4>
 <p><%=h @unknown_subject.description %></p>
 
+<%# twitter IDs %>
 <h4>Twitter IDs</h4>
 <% if @unknown_subject.data_sources.empty? -%>
-  <div class="well">No data sources registered</div>
+  <div class="well">No social network IDs registered</div>
 <% else -%>
   <%= render :partial => 'data_source', :collection => @unknown_subject.data_sources %>
 <% end -%>
+
+<div class="well">
+  <strong>
+    <%= link_to new_unknown_subject_data_source_path(@unknown_subject) do %>
+      <i class="icon-plus"></i>&nbsp;New social network ID
+    <% end %>
+  </strong>
+</div>
+
+<%# profiles %>
+<h4>Profiles</h4>
+<% if @unknown_subject.profiles.empty? -%>
+  <div class="well">No profiles registered</div>
+<% else -%>
+  <%= render :partial => 'profile', :collection => @unknown_subject.profiles %>
+<% end -%>
+
+<div class="well">
+  <strong>
+    <%= link_to new_unknown_subject_profile_path(@unknown_subject) do %>
+      <i class="icon-plus"></i>&nbsp;New profile
+    <% end %>
+  </strong>
+</div>
 

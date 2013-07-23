@@ -3,27 +3,32 @@
   <%= link_to @unknown_subject.name, @unknown_subject %> &gt; <%= @data_source.user_id %></h3>
 
 <%# page contents %>
-<div class="well">
-  <span class="pull-left"><%= page_entries_info @status_updates %></span>
-  <span class="pull-right"><%= paginate @status_updates %></span>
-</div>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Published</th>
-      <th>Source</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @status_updates.desc(:_id).each do |status_update| -%>
-    <tr>.
-      <td><%= link_to status_update.text, [ @unknown_subject, @data_source, status_update ] %></td>
-      <td><%=h time_ago_in_words(status_update.created_at.to_time) %>&nbsp;ago</td>
-      <td><%= raw status_update.source %></td>
-    </tr>
+<h4>
+  <%=h @data_source.user_id %>
+  <span class="pull-right">
+    <%= link_to unknown_subject_data_source_path(@unknown_subject, @data_source),
+      :confirm => "Remove #{@data_source.user_id} and his/her #{@data_source.status_updates.count} posts?",
+      :method => :delete do %>
+      <li class="icon-trash"></li>&nbsp;Delete
     <% end -%>
-  </tbody>
-</table>
+  </span>
+</h4>
 
+<table class="table table-bordered">
+  <tr>
+    <th>Twitter Profile</th>
+    <td><%= link_to @data_source.user_id, @data_source.twitter_profile_url %></td>
+  </tr>
+  <tr>
+    <th>Posts Indexed</th>
+    <td><%=h @data_source.status_updates.count %></td>
+  </tr>
+  <tr>
+    <th>Earliest Post</th>
+    <td><%=h time_ago_in_words(@data_source.status_updates.min_by { |s| s.created_at }.created_at) %></td>
+  </tr>
+  <tr>
+    <th>Latest Post</th>
+    <td><%=h time_ago_in_words(@data_source.status_updates.max_by { |s| s.created_at }.created_at) %></td>
+  </tr>
+</table>

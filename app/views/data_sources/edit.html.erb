@@ -1,0 +1,7 @@
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt;
+  <%= link_to @unknown_subject.name, @unknown_subject %> &gt; Edit Social Network ID</h3>
+
+<%# page contents %>
+<%= render :partial => 'data_source_form',
+  :locals => { :unknown_subject => @unknown_subject, :data_source => @data_source } %>

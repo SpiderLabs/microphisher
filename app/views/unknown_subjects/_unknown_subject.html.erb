@@ -1,5 +1,8 @@
 <%# unknown subject partial %>
 <%= content_tag_for :div, unknown_subject, :class => 'well' do -%>
-  <h4><%= link_to unknown_subject.name, unknown_subject %></h4>
+  <h4>
+    <%= link_to unknown_subject.name, unknown_subject %>
+    <span class="pull-right"><%=h unknown_subject.data_sources.count %>&nbsp;Twitter IDs</span>
+  </h4>  
   <p><%=h unknown_subject.description %></p>
 <% end -%>

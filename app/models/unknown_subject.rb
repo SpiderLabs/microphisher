@@ -11,4 +11,5 @@ class UnknownSubject
   # Relations
   belongs_to :user
   has_many :data_sources
+  has_many :profiles
 end

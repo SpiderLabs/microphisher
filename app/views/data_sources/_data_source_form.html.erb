@@ -1,0 +1,9 @@
+<%# unknown_subject_form %>
+<%= form_for [ unknown_subject, data_source ] do |f| %>
+  <fieldset>
+    <legend>New Social Network ID</legend>
+    <%= f.label :user_id, 'Screen Name' %>
+    <%= f.text_field :user_id, :placeholder => 'Twitter user ID' %>
+    <br/>
+    <%= f.submit %>
+<% end -%>
