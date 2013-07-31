@@ -12,10 +12,18 @@ gem 'mongoid', '~> 3.0.0'
 gem 'oauth'
 
 # Use DelayedJob for background job scheduling
+gem 'daemons'
 gem 'delayed_job_mongoid'
 
 # Use Kaminari for pagination
 gem 'kaminari'
+
+# Use treat for NLP
+gem 'engtagger'
+gem 'scalpel'
+gem 'stanford-core-nlp'
+gem 'treat'
+gem 'nokogiri'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -29,6 +29,9 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     arel (3.0.2)
+    bind-it (0.2.7)
+      rjb (~> 1.4.3)
+    birch (0.0.8)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -37,11 +40,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    daemons (1.1.9)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
     delayed_job_mongoid (2.0.0)
       delayed_job (~> 3.0)
       mongoid (~> 3.0)
+    engtagger (0.1.2)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -59,6 +64,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
+    mini_portile (0.5.1)
     mongoid (3.0.23)
       activemodel (~> 3.1)
       moped (~> 1.2)
@@ -66,9 +72,12 @@ GEM
       tzinfo (~> 0.3.22)
     moped (1.5.0)
     multi_json (1.7.7)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     oauth (0.4.7)
     origin (1.1.0)
     polyglot (0.3.3)
+    progressbar (0.20.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -94,18 +103,30 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    rjb (1.4.8)
+    rubyzip (0.9.9)
     sass (3.2.9)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    scalpel (0.2.1)
+    schiphol (0.9.4)
+      progressbar (>= 0.10.0)
+      rubyzip (>= 0.9.6.1)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    stanford-core-nlp (0.5.1)
+      bind-it (~> 0.2.5)
     thor (0.18.1)
     tilt (1.4.1)
+    treat (2.0.7)
+      birch
+      schiphol
+      yomu
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -113,17 +134,25 @@ GEM
     uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    yomu (0.1.9)
+      mime-types (~> 1.23)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  daemons
   delayed_job_mongoid
+  engtagger
   jquery-rails
   kaminari
   mongoid (~> 3.0.0)
+  nokogiri
   oauth
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  scalpel
+  stanford-core-nlp
+  treat
   uglifier (>= 1.0.3)

@@ -16,6 +16,10 @@
 
 <table class="table table-bordered">
   <tr>
+    <th>Status</th>
+    <td><strong><%=h @data_source[:status] %></strong></td>
+  </tr>
+  <tr>
     <th>Twitter Profile</th>
     <td><%= link_to @data_source.user_id, @data_source.twitter_profile_url %></td>
   </tr>
@@ -25,10 +29,12 @@
   </tr>
   <tr>
     <th>Earliest Post</th>
-    <td><%=h time_ago_in_words(@data_source.status_updates.min_by { |s| s.created_at }.created_at) %></td>
+    <td><%=h @data_source.status_updates.empty? ? 'n/a' :
+      time_ago_in_words(@data_source.status_updates.min(:created_at)) %></td>
   </tr>
   <tr>
     <th>Latest Post</th>
-    <td><%=h time_ago_in_words(@data_source.status_updates.max_by { |s| s.created_at }.created_at) %></td>
+    <td><%=h @data_source.status_updates.empty? ? 'n/a' :
+      time_ago_in_words(@data_source.status_updates.max(:created_at)) %></td>
   </tr>
 </table>

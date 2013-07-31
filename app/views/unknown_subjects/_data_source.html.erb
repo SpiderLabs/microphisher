@@ -1,9 +1,11 @@
 <div class="well">
   <strong><%= link_to data_source.user_id, [ @unknown_subject, data_source ] %></strong>
+  <!--
   <% if data_source.last_crawl.nil? -%>
     <span class="pull-right">Never crawled</span>
   <% else -%>
     <span class="pull-right">Last crawled <%=h time_ago_in_words(data_source.last_crawl) %> ago</span>
   <% end -%>
+  -->
   <p><%=h data_source.status_updates.count %>&nbsp;posts</p>
 </div>

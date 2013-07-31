@@ -1,0 +1,16 @@
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt;
+  <%= link_to @unknown_subject.name, @unknown_subject %> &gt;
+  <%= link_to @profile.name, [ @unknown_subject, @profile ]%> &gt; NLP Tree</h3>
+
+<%# page contents %>
+<h4>NLP Tree</h4>
+
+<table class="table table-bordered">
+  <tr>
+    <td>
+      <pre>
+<%=h @profile.treat_collection.visualize :tree %>
+      </pre>
+    </td>
+</table>

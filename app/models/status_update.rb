@@ -4,6 +4,12 @@
 class StatusUpdate
   include Mongoid::Document
   
+  # Filter criteria field listing
+  CRITERIA_FIELDS = [ :text, :source, :created_at ]
+  
+  # Filter criteria operator listing
+  CRITERIA_OPERATORS = [ :match, :greater_than, :less_than ]
+
   # Attribute listing
   field :created_at, type: DateTime
   

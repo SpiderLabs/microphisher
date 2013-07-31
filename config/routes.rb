@@ -7,7 +7,21 @@ Mongophisher::Application.routes.draw do
     resources :data_sources do
       resources :status_updates
     end
-    resources :profiles
+    
+    resources :profiles do
+      # Collection routes refer to multiple resources
+      collection do
+        get :search
+      end
+      
+      # Member routes refer to a resource instance
+      member do
+        get :input
+        get :nlp_tree
+        post :validate
+        post :autocomplete
+      end
+    end
   end
 
   # Home screen

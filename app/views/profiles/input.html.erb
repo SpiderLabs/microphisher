@@ -1,0 +1,94 @@
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt;
+  <%= link_to @unknown_subject.name, @unknown_subject %> &gt;
+  <%= link_to @profile.name, [ @unknown_subject, @profile ] %> &gt;
+  Forge Input</h3>
+
+<%# page contents %>
+<!-- text ranking -->
+<div class="span12" id="criteria_container">
+  <p>Please enter your text below</p>
+<%#
+  <div class="row-fluid">
+    <div class="span2">Word Frequency:</div>
+    <div class="progress span4">
+      <div id="criteria_a" class="bar" style="width: 0%"></div>
+    </div>
+    <div class="span2">Sentence Length:</div>
+    <div class="progress span4">
+      <div id="criteria_b" class="bar" style="width: 0%"></div>
+    </div>
+  </div>
+%>
+</div>
+
+<!-- text entry form -->
+<form class="navbar-form">
+  <textarea id="forged_input" class="span12" placeholder="Enter your text here"></textarea>
+</form>
+
+<!-- word suggestion -->
+<div class="span12">
+  <div class="row-fluid">
+    <span id="word-list">&nbsp;</span>
+    </ul>
+  </div>
+</div>
+
+<%# TODO: This should definitely be moved into the asset pipeline %>
+<script type="text/javascript">
+  /* Add an additional criteria field to the form */
+  $('#forged_input').keyup(function() {
+    /**
+     * Part #1: Submit the whole text in the forged input text field to the validation
+     * URL and update the ranking charts accordingly
+     */
+    $.ajax({
+      'url': '<%= validate_unknown_subject_profile_path(@unknown_subject, @profile) %>',
+      'method': 'post',
+      'data': { 'text': $('#forged_input').val() },
+      'dataType': 'json'
+    }).done(function(data) {
+      console.log(data);
+      $('#criteria_container').empty();
+      data.forEach(function(criteria) {
+        <%# TODO: REFACTOR THIS UGLY UGLY HACK! %>
+        var criteriaRow = '<div class="row-fluid"><div class="span2">' +
+          criteria.label + '</div><div class="progress span8"><div id="' +
+          criteria.id + '" class="bar" style="width: ' + criteria.value + '%"></div></div>' +
+          '<div class="span2">' + criteria.value + '%</div>';
+        $('#criteria_container').append(criteriaRow);
+      });
+    });
+    
+    /**
+     * Part #2: Submit the last word (presuming the user is changing that) and
+     * obtain the ranked autocomplete list, which is listed accordingly
+     */
+    var lastWord = $('#forged_input').val().split(' ').pop();
+    
+    /* Autocomplete only makes sense when there is a word being typed */
+    if (lastWord.length > 0) {
+      $.ajax({
+        'url': '<%= autocomplete_unknown_subject_profile_path(@unknown_subject, @profile) %>',
+        'method': 'post',
+        'data': { 'word': lastWord },
+        'dataType': 'json'
+      }).done(function(data) {
+        $('#word-list').empty();
+        data.forEach(function(word) {
+          $('#word-list').append('<button class="btn btn-info">' + word + '</button> ');
+        });
+      });
+    }
+
+      <%# ---
+      /* TODO: Check status field for failed XHR requests */
+      $('#word-list').empty();
+      data.result.forEach(function(word) {
+        $('#word-list').append('<button class="btn btn-info">' + word + '</button> ');
+      });
+      -- %>
+    return false;
+  });
+</script>

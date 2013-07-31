@@ -1,0 +1,17 @@
+<%# this component will be cloned as many times as required by the user %>
+<%# each clone allows the user to add different filtering criteria      %>
+<div>
+  <%# criteria field dropdown %>
+  <select name="profile_criteria_field[]">
+    <%= options_for_select({ 'text' => 'text', 'source' => 'source',
+      'language' => 'lang' }) %>
+  </select>
+  
+  <%# criteria operator dropdown %>
+  <select name="profile_criteria_operator[]">
+    <%= options_for_select({ 'match' => 'match', 'does not match' => 'not_match' }) %>
+  </select>
+  
+  <%# criteria field parameter value %>
+  <input name="profile_criteria_value[]" type="text" placeholder="Criteria value..." />
+</div>

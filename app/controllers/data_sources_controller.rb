@@ -18,6 +18,7 @@ class DataSourcesController < ApplicationController
   def create
     @data_source = @unknown_subject.data_sources.new(params[:data_source])
     @data_source.save!
+    @data_source.delay.fetch_status_updates!
     redirect_to [ @unknown_subject, @data_source ]
   end
 

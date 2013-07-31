@@ -1,0 +1,48 @@
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt;
+  <%= link_to @unknown_subject.name, @unknown_subject %> &gt; New Profile</h3>
+
+<%# page contents %>
+<%= form_tag search_unknown_subject_profiles_path(@unknown_subject),
+  :id => 'profile_criteria_form' do %>
+  <div class="well">
+    <h4>
+      Post Eligibility Criteria
+      <a href="#" id="profile_criteria_add" class="pull-right">
+        <li class="icon-plus"></li>&nbsp;Add Criteria</a>
+    </h4>
+    
+    <div id="profile_criteria_container"></div>
+    
+    <button class="btn" id="apply_criteria" disabled="true">
+      <i class="icon-filter"></i>&nbsp;Apply Filter
+    </button>
+    <button class="btn" id="start_profile" disabled="true">
+      <i class="icon-eye-open"></i>&nbsp;Start Profile
+    </button>
+  </div>
+<% end -%>
+
+<%# TODO: This should definitely be moved into the asset pipeline %>
+<script type="text/javascript">
+  /* Add an additional criteria field to the form */
+  $('#profile_criteria_add').click(function() {
+    var profile_criteria = "<%= escape_javascript(render :partial => 'profile_criteria') %>";
+    $('#profile_criteria_container').append(profile_criteria);
+    $('#apply_criteria').removeAttr('disabled');
+    return false;
+  });
+  
+  $('#apply_criteria').click(function() {
+    var filter = $('#profile_criteria_form').serialize();
+    $('#profile_criteria_form').attr('method', 'get').submit();
+    console.log(filter);
+    return false;
+  });
+  
+  $('#start_profile').click(function() {
+    var filter = $('#profile_criteria_form').serialize();
+    console.log(filter);
+    return false;
+  });
+</script>

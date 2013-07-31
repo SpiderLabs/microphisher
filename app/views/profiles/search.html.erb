@@ -1,0 +1,85 @@
+<%# page title %>
+<h3><%= link_to 'Unknown Subjects', unknown_subjects_path %> &gt;
+  <%= link_to @unknown_subject.name, @unknown_subject %> &gt; New Profile</h3>
+
+<%# page contents %>
+<%= form_tag '#', :id => 'profile_criteria_form' do %>
+  <div class="well">
+    <h4>
+      <p>Post Eligibility Criteria</p>
+      <a href="#" id="profile_criteria_add" class="pull-right">
+        <li class="icon-plus"></li>&nbsp;Add Criteria</a>
+    </h4>
+    
+    <div id="profile_criteria_container"></div>
+    
+    <div id="current_criteria_container">
+      Current criteria: <strong><%=h @status_updates.selector %></strong>
+    </div>
+    
+    <label for="profile[name]">Name:</label>
+    <%= text_field_tag 'profile[name]', nil, :placeholder => 'Profile name...' %>
+    <label for="profile[description]">Description:</label>
+    <%= text_field_tag 'profile[description]', nil, :placeholder => 'Profile description...' %>
+    <br/>
+
+    <button class="btn" id="apply_criteria" disabled="true">
+      <i class="icon-filter"></i>&nbsp;Apply Filter
+    </button>
+    <button class="btn" id="start_profile">
+      <i class="icon-eye-open"></i>&nbsp;Start Profile
+    </button>
+  </div>
+<% end -%>
+
+<div>
+  <span class="pull-left"><%= paginate @status_updates %></span>
+  <span class="pull-right"><%= page_entries_info @status_updates %></span>
+</div>
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Twitter ID</th>
+      <th>Contents</th>
+      <th>Published</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @status_updates.each do |status_update| -%>
+      <tr>
+        <td><%= link_to status_update.data_source.user_id,
+          [ @unknown_subject, status_update.data_source ] %></td>
+        <td><%=h status_update.text %></td>
+        <td><%=h time_ago_in_words(status_update.created_at) %></td>
+        <td><%= raw status_update.source %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+
+<%# TODO: This should definitely be moved into the asset pipeline %>
+<script type="text/javascript">
+  /* Add an additional criteria field to the form */
+  $('#profile_criteria_add').click(function() {
+    var profile_criteria = "<%= escape_javascript(render :partial => 'profile_criteria') %>";
+    $('#profile_criteria_container').append(profile_criteria);
+    $('#apply_criteria').removeAttr('disabled');
+    return false;
+  });
+  
+  $('#apply_criteria').click(function() {
+    var filter = $('#profile_criteria_form').serialize();
+    var action = "<%= escape_javascript search_unknown_subject_profiles_path(@unknown_subject) %>";
+    $('#profile_criteria_form').attr('action', action).attr('method', 'get').submit();
+    return false;
+  });
+  
+  $('#start_profile').click(function() {
+    var filter = $('#profile_criteria_form').serialize();
+    var action = "<%= escape_javascript unknown_subject_profiles_path(@unknown_subject) %>";
+    $('#profile_criteria_form').attr('action', action).attr('method', 'post').submit();
+    return false;
+  });
+</script>

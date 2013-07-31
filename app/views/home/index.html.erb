@@ -3,9 +3,15 @@
 
 <%# page contents %>
 <% if logged_in? -%>
-  <p>Welcome, <strong><%=h current_user.name %></strong>. You have
-  <%= link_to "#{current_user.unknown_subjects.count} unknown subjects",
-    unknown_subjects_path %> registered.</p>
+  <% if current_user.unknown_subjects.count > 0 -%>
+    <p>Welcome, <strong><%=h current_user.name %></strong>. You have
+    <%= link_to "#{current_user.unknown_subjects.count} unknown subjects",
+      unknown_subjects_path %> registered.</p>
+  <% else -%>
+    <p>Welcome, <strong><%= current_user.name %></strong>. You do not
+    have any unknown subjects registered,
+    <%= link_to 'add a new one', new_unknown_subject_path %>.</p>
+  <% end -%>
 <% else -%>
   <p>Please <%= link_to 'login with Twitter', :controller => :oauth,
     :action => :login %></p>
