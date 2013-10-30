@@ -6,7 +6,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Use Mongoid instead of ActiveRecord for ORM
-gem 'mongoid', '~> 3.0.0'
+gem 'mongoid', '~> 3.1.0'
 
 # Use OAuth
 gem 'oauth'
@@ -17,6 +17,10 @@ gem 'delayed_job_mongoid'
 
 # Use Kaminari for pagination
 gem 'kaminari'
+
+# Enforce rubyzip version to guarantee
+# compatibility with treat
+gem 'rubyzip', '~> 0.9.9'
 
 # Use treat for NLP
 gem 'engtagger'
