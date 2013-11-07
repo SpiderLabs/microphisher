@@ -125,7 +125,7 @@ already, right? =)
 
 microphisher - a spear phishing support tool
 
-Created by Ulisses Albuquerque & Joaquim Espinhara  
+Created by @urma & @jespinhara
 Copyright (C) 2013 [Trustwave Holdings, Inc.](https://www.trustwave.com/ "Trustwave")
  
 This program is free software: you can redistribute it and/or modify
