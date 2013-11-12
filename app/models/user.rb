@@ -24,7 +24,7 @@ class User
   # Attribute listing
   field :name, type: String
   field :real_name, type: String
-  field :avatar, type: String
+  field :profile_image_url, type: String
   field :oauth_token, type: String
   field :oauth_secret, type: String
   
@@ -58,11 +58,23 @@ class User
       user = User.create(:id => user_identity['id'],
         :name => user_identity['screen_name'],
         :real_name => user_identity['name'],
-        :avatar => user_identity['profile_image_url'],
+        :profile_image_url => user_identity['profile_image_url'],
         :oauth_token => access_token.token,
         :oauth_secret => access_token.secret)
+    else
+      # If the user unlinks microphisher from this Twitter account
+      # and tries to use the app again, a new oauth_token/oauth_secret
+      # tuple will be issued, and we need to update the persisted
+      # instance accordingly
+      if user.oauth_token != access_token.token ||
+        user.oauth_secret != access_token.secret
+        user.oauth_token = access_token.token
+        user.oauth_secret = access_token.secret
+        user.save!
+      end
     end
     
     user
   end
 end
+
