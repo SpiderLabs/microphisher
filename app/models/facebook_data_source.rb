@@ -18,22 +18,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-class DataSource
+class FacebookDataSource < DataSource
   include Mongoid::Document
+  
+  # Callbacks
 
-  # Relations
-  belongs_to :unknown_subject
-  has_many :status_updates
-
-  # Attribute listing
-  field :user_id, type: String
-  field :last_crawl, type: DateTime
-  field :status, type: String, default: 'pending'
-  field :data_source_metadata, type: Hash, default: Hash.new
-  field :profile_image_url, type: String
-
-  def fetch_status_updates!
-    raise NotImplementedError.new('This method must be overridden')
-  end
+  # Validations
 end
 

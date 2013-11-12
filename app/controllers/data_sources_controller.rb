@@ -36,10 +36,14 @@ class DataSourcesController < ApplicationController
   end
   
   def create
-    @data_source = @unknown_subject.data_sources.new(params[:data_source])
+    # TODO: Check data source type and create instance based on
+    # corresponding class
+    @data_source = TwitterDataSource.new(params[:data_source])
+
+    @data_source.unknown_subject = @unknown_subject
     @data_source.save!
     @data_source.delay.fetch_status_updates!
-    redirect_to [ @unknown_subject, @data_source ]
+    redirect_to unknown_subject_data_source_path(@unknown_subject, @data_source)
   end
 
   def destroy
