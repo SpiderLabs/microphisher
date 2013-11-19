@@ -18,12 +18,18 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %>
 
-<div class="well">
-  <strong><%= link_to data_source.user_id, unknown_subject_data_source_path(@unknown_subject, data_source) %></strong>
-  <% if data_source.last_crawl.nil? -%>
-    <span class="pull-right">Never crawled</span>
-  <% else -%>
-    <span class="pull-right">Last crawled <%=h time_ago_in_words(data_source.last_crawl) %> ago</span>
-  <% end -%>
-  <p><%=h data_source.status_updates.count %>&nbsp;posts</p>
-</div>
+
+<%= content_tag_for :div, data_source, :class => 'well media' do -%>
+  <a class="pull-left" href="#" valign="center">
+  	<%= image_tag data_source.profile_image_url, :class => 'media-object' %>
+  </a>
+  <div class="media-body">
+		<strong><%= link_to data_source.user_id, unknown_subject_data_source_path(@unknown_subject, data_source) %></strong>
+		<% if data_source.last_crawl.nil? -%>
+			<span class="pull-right">Never crawled</span>
+		<% else -%>
+			<span class="pull-right">Last crawled <%=h time_ago_in_words(data_source.last_crawl) %> ago</span>
+		<% end -%>
+		<p><%=h data_source.status_updates.count %>&nbsp;posts</p>
+  </div>
+<% end -%>

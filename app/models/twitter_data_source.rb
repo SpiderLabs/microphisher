@@ -25,6 +25,10 @@ class TwitterDataSource < DataSource
   before_validation do |document|
     self.data_source_metadata = user_information(user_id)
   end
+  
+  before_save do |document|
+  	self.profile_image_url = self.data_source_metadata['profile_image_url'] || '/default_profile_image.png'
+  end
 
   # Validations
   validates :user_id, presence: true

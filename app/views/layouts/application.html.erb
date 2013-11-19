@@ -28,47 +28,42 @@
   <title>&micro;hisher</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%#
-    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/united/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-  %>
-  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <script src="/bootstrap/js/bootstrap.min.js"></script>
   <%= csrf_meta_tags %>
+  
+  <%# Twitter Bootstrap CSS %>
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
 <body>
   <%# main page container %>
   <div class="container">
   
     <%# navigation bar %>
-    <div class="navbar">
-      <div class="navbar-inner">
-      <%= link_to 'µphisher', home_url, :class => 'brand' %>
-      <ul class="nav">
-        <%# Home link -- this should definitely be more DRY %>
-        <% if current_page?(home_url) -%>
-          <li class="active"><%= link_to 'Home', '#' %></li>
-        <% else -%>
-          <li><%= link_to 'Home', home_url %></li>
-        <% end -%>
-        
-        <%# Unknown subjects link -- this should definitely be more DRY %>
-        <% if current_page?(unknown_subjects_url) -%>
-          <li class="active"><%= link_to 'Unsubs', '#' %></li>
-        <% else -%>
-          <li><%= link_to 'Unsubs', unknown_subjects_url %></li>
-        <% end -%>
-        
-        <%# Profiles link -- this should definitely be more DRY %>
-        <% if logged_in? -%>
-          <li><%= link_to 'Logout', oauth_logout_path %></li>
-        <% end -%>
-      </ul>
+    <div class="masthead">
+    	<ul class="nav nav-pills pull-right">
+    		<%# links to views; mostly useless right now %>
+    		<li <%= raw('class="active"') if current_page?(home_url) %>>
+    			<%= link_to 'Home', home_url %>
+    		</li>
+    		<li <%= raw('class="active"') if current_page?(unknown_subjects_url) %>>
+    			<%= link_to 'Unknown Subjects', unknown_subjects_url %>
+    		</li>
+    		
+    		<%# link to logout function; only available if logged in (of course) %>
+    		<% if logged_in? -%>
+    		<li>
+    			<%= link_to 'Logout', oauth_logout_path %></li>
+    		</li>
+    		<% end -%>
+    	</ul>
+    	<h3 class="muted">&micro;phisher</h3>
     </div>
-
+    
     <%# page contents %>
     <%= yield %>
+    
+    <%# bootstrap support javascript %>
+  	<script src="/bootstrap/js/bootstrap.min.js"></script>
   </div>
 </body>
 </html>

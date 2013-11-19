@@ -40,7 +40,8 @@
     <label for="profile[name]">Name:</label>
     <%= text_field_tag 'profile[name]', nil, :placeholder => 'Profile name...' %>
     <label for="profile[description]">Description:</label>
-    <%= text_field_tag 'profile[description]', nil, :placeholder => 'Profile description...' %>
+    <%= text_field_tag 'profile[description]', nil,
+    	:placeholder => 'Profile description...' %>
     <br/>
 
     <button class="btn" id="apply_criteria" disabled="true">
@@ -70,7 +71,8 @@
     <% @status_updates.each do |status_update| -%>
       <tr>
         <td><%= link_to status_update.data_source.user_id,
-          [ @unknown_subject, status_update.data_source ] %></td>
+          unknown_subject_data_source_path(@unknown_subject,
+          status_update.data_source) %></td>
         <td><%=h status_update.text %></td>
         <td><%=h time_ago_in_words(status_update.created_at) %></td>
         <td><%= raw status_update.source %></td>

@@ -45,8 +45,9 @@
   <tr>
     <th>Twitter Sources</th>
     <td>
-      <%= raw(@profile.unknown_subject.data_sources.map { |data_source| 
-        link_to data_source.user_id, [ @unknown_subject, data_source ]
+      <%= raw(@profile.unknown_subject.data_sources.map { |data_source|
+          link_to data_source.user_id,
+          	unknown_subject_data_source_path(@unknown_subject, data_source)      
         }.join(', ')) -%>
     </td>
   </tr>

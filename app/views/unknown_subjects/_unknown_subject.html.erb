@@ -19,31 +19,16 @@
 %>
 
 <%# unknown subject partial %>
-<%#
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">Media heading</h4>
-    ...
- 
-    <!-- Nested media object -->
-    <div class="media">
-      ...
-    </div>
-  </div>
-</div>
-%>
 <%= content_tag_for :div, unknown_subject, :class => 'well media' do -%>
   <a class="pull-left" href="#" valign="center">
-    <img class="media-object" src="https://pbs.twimg.com/profile_images/3687054272/e963ed9414e165cb00e6bf4a757b7d3e_normal.png">
+  	<%= image_tag unknown_subject.profile_image_url, :class => 'media-object' %>
   </a>
   <div class="media-body">
     <h4>
       <%= link_to unknown_subject.name, unknown_subject %>
-      <span class="pull-right"><%=h unknown_subject.data_sources.count %>&nbsp;Twitter IDs</span>
-    </h4>  
+      <span class="pull-right"><%=h unknown_subject.data_sources.count %>&nbsp;data
+      	<%=h 'source'.pluralize(unknown_subject.data_sources.count) %></span>
+    </h4>
     <p><%=h unknown_subject.description %></p>
   </div>
 <% end -%>

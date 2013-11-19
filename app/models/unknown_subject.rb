@@ -32,4 +32,12 @@ class UnknownSubject
   belongs_to :user
   has_many :data_sources
   has_many :profiles
+  
+  def profile_image_url
+  	if data_sources.count > 0
+  		data_sources.first.profile_image_url
+  	else
+  		'/default_profile_image.png'
+  	end
+  end
 end

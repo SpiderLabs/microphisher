@@ -24,9 +24,11 @@
 <%# page contents %>
 <% if logged_in? -%>
   <% if current_user.unknown_subjects.count > 0 -%>
-    <p>Welcome, <strong><%=h current_user.name %></strong>. You have
-    <%= link_to "#{current_user.unknown_subjects.count} unknown subjects",
-      unknown_subjects_path %> registered.</p>
+    <p>Welcome, <strong><%=h current_user.name %></strong>.
+    <p>You have <%= link_to "#{@unknown_subject_count} unknown subjects",
+      unknown_subjects_path %> registered, with <%=h @data_source_count %>
+      associated data sources and <%=h @status_update_count %> status
+      updates indexed.</p>
   <% else -%>
     <p>Welcome, <strong><%= current_user.name %></strong>. You do not
     have any unknown subjects registered,

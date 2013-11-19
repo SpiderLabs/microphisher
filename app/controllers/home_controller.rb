@@ -20,4 +20,22 @@
 
 class HomeController < ApplicationController
   skip_filter :require_login, only: [ :index ]
+  
+  def index
+  	# We can only provide indexing metrics if the user is currently
+  	# logged in
+  	if logged_in?
+  		# Unknown subject count
+  		@unknown_subject_count = current_user.unknown_subjects.count
+  		
+  		# Data source count
+  		unknown_subject_ids = current_user.unknown_subjects.map { |us| us.id }
+  		data_sources = DataSource.in(unknown_subject_id: unknown_subject_ids)
+  		@data_source_count = data_sources.count || 0
+  		
+  		# Status update count
+  		data_source_ids = data_sources.map { |ds| ds.id }
+  		@status_update_count = StatusUpdate.in(data_source_id: data_source_ids).count || 0
+  	end
+  end
 end

@@ -29,7 +29,8 @@ class User
   field :oauth_secret, type: String
   
   # Validations
-  validates :name, :real_name, :avatar, :oauth_token, :oauth_secret, presence: true
+  validates :name, :real_name, :profile_image_url,
+  	:oauth_token, :oauth_secret, presence: true
   validates :name, uniqueness: true
   
   # Relations
