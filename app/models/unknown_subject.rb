@@ -40,4 +40,8 @@ class UnknownSubject
   		'/default_profile_image.png'
   	end
   end
+  
+  def status_updates
+  	StatusUpdate.in(data_source_id: data_sources.pluck(:id))
+  end
 end

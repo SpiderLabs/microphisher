@@ -25,6 +25,15 @@ class UnknownSubjectsController < ApplicationController
   
   def show
     @unknown_subject = current_user.unknown_subjects.find(params[:id])
+    
+    # TODO: Refactor this code to perform aggregation in Mongo instead
+    # of Ruby
+    geo_sources = @unknown_subject.status_updates.ne(coordinates: nil)
+    @geo_enabled_sources = Hash[geo_sources.pluck(:source).uniq.map do |src|
+    	src_clean = src.gsub(/^<.+>(.+)<.+>$/, '\1')
+    	src_regexp = Regexp.new(src_clean)
+    	[ src_clean, geo_sources.where(source: src_regexp).count ]
+    end]
   end
   
   def new
@@ -52,5 +61,15 @@ class UnknownSubjectsController < ApplicationController
     @unknown_subject = current_user.unknown_subjects.find(params[:id])
     @unknown_subject.destroy
     redirect_to unknown_subjects_path
+  end
+  
+  def export_profile
+  	@unknown_subject = current_user.unknown_subjects.find(params[:id])
+		geo_updates = @unknown_subject.status_updates.ne(coordinates: nil)
+		@status_updates = geo_updates.where(source: Regexp.new(params[:source]))
+  	
+  	respond_to do |format|
+  		format.kml
+  	end
   end
 end
