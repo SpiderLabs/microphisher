@@ -91,7 +91,11 @@ class UnknownSubjectsController < ApplicationController
   def sources_chart(criteria)
   	# Fetch sources count and group low-ranking sources into 'Other'
 		sorted_data = sources_hash(criteria).sort { |a, b| b[1] <=> a[1] }
-		other_value = [ [ 'Other', sorted_data[9..-1].inject(0) { |a,b| a + b[1] } ] ]
+		if sorted_data.size > 10
+			other_value = [ [ 'Other', sorted_data[9..-1].inject(0) { |a,b| a + b[1] } ] ]
+		else
+			other_value = []
+		end
 		data = sorted_data[0..8] + other_value
 		
 		# Produce the actual chart
