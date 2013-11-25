@@ -48,6 +48,34 @@
 </div>
 
 <div class="row">
+	<%# charts %>
+	<div id="social_networks" class="span12">
+		<h4>Charts</h4>
+		<div class="tabbable tabs-left">
+			<%# chart tabs %>
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#source_chart_tab" data-toggle="tab">Source</a></li>
+				<li><a href="#geo_chart_tab" data-toggle="tab">Geolocation</a></li>
+				<li><a href="#retweet_chart_tab" data-toggle="tab">Retweet</a></li>
+			</ul>
+		
+			<%# chart contents %>
+			<div class="tab-content">
+				<div class="tab-pane active" id="source_chart_tab">
+					 <%= high_chart('source_chart', @source_chart) %>
+				</div>
+				<div class="tab-pane" id="geo_chart_tab">
+					 <%= high_chart('geo_chart', @geo_chart) %>
+				</div>
+				<div class="tab-pane" id="retweet_chart_tab">
+					 <%= high_chart('retweet_chart', @retweet_chart) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
 	<%# social network IDs %>
 	<div id="social_networks" class="span6">
 		<h4>Social Network IDs</h4>
@@ -56,7 +84,7 @@
 				<li class="active"><a href="#twitter_tab" data-toggle="tab">Twitter</a></li>
 				<li><a href="#facebook_tab" data-toggle="tab">Facebook</a></li>
 				<li><a href="#linkedin_tab" data-toggle="tab">LinkedIn</a></li>
-				<li class="pull-right"><a href="#graph_tab" data-toggle="tab">New...</a></li>
+				<li class="pull-right"><a href="#new_source" data-toggle="modal">New...</a></li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="twitter_tab">
@@ -89,7 +117,7 @@
 				<li class="active"><a href="#nlp_tab" data-toggle="tab">NLP</a></li>
 				<li><a href="#geo_tab" data-toggle="tab">Geo</a></li>
 				<li><a href="#graph_tab" data-toggle="tab">Graph</a></li>
-				<li class="pull-right"><a href="#graph_tab" data-toggle="tab">New...</a></li>
+				<li class="pull-right"><a href="#new_profile" data-toggle="tab">New...</a></li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="nlp_tab">
@@ -113,7 +141,7 @@
 							</ul>
 						<% end -%>
 					</div>
-				</div>			
+				</div>
 				<div class="tab-pane" id="graph_tab">
 					<div class="well">
 						<strong>Social network graph profile not supported yet</strong>
@@ -122,4 +150,27 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<!-- Button to trigger modal -->
+ 
+<!-- Modal -->
+<div id="new_source" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<%= form_for [ @unknown_subject, @unknown_subject.data_sources.new ] do |f| %>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">New Data Source</h3>
+	</div>
+	<div class="modal-body">
+		<fieldset>
+			<legend>New Social Network ID</legend>
+			<%= f.label :user_id, 'Screen Name' %>
+			<%= f.text_field :user_id, :placeholder => 'Twitter user ID' %>
+			<br/>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary" type="submit">Save changes</button>
+	</div>
+<% end -%>
 </div>

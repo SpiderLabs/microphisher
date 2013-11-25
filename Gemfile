@@ -29,6 +29,9 @@ gem 'stanford-core-nlp'
 gem 'treat'
 gem 'nokogiri'
 
+# Use lazy-high-charts for graphing/charts
+gem 'lazy_high_charts'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -13,3 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//
+// Add lazy-high-charts for graphing/charts
+//
+//= require highcharts/highcharts                                                           
+//= require highcharts/highcharts-more                                                         
+//= require highcharts/highstock
