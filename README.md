@@ -1,5 +1,7 @@
 # &micro;phisher
 
+:warning: *NOTE: This tool is no longer under active maintenance.*
+
 ## Introduction
 
 &micro;phisher is a tool designed to support social engineering activities. It
